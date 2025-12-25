@@ -1,0 +1,11 @@
+Todo:
+- add multiple voiced for polyphonic        priority: low
+- clean up ui                               priority: high
+- make synth ui dynamic                     priotity: high
+- add keyboard functionality                priotity: low
+- add audio export                          priority: low
+- add midi import                           priority: low
+
+
+Done:
+- add melody                                

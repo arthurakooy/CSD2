@@ -8,10 +8,11 @@
 using namespace std;
 
 int main() {
+    float sampleRate = 44100.0f;
     ScopedMessageThreadEnabler scopedMessageThreadEnabler;
-    CustomCallback audioSource (44100);
+    CustomCallback audioSource (sampleRate);
 
-    cout << "=== SYNTH ===" << endl;
+    cout << "=== INITIALIZE SYNTH ===" << endl;
     cout << endl;
     
     // select type
@@ -23,7 +24,6 @@ int main() {
     string choice;
     cin >> choice;
     
-    float sampleRate = 44100.0f;
     
     while(true) {
         if (choice == "1") {
@@ -79,6 +79,20 @@ int main() {
         else if (choice == "2") {
             auto fmSynth = make_unique<FmSynth>(sampleRate);
 
+            // initialize ratio
+            cout << "Enter ratio" << endl;
+            cout << "<ratio>" << endl;
+            float ratio;
+            cin >> ratio;
+            fmSynth->setRatio(ratio);
+
+            // initialze modulation index
+            cout << "enter modulation index" << endl;
+            cout << "<modIndex>" << endl;
+            float modIndex;
+            cin >> modIndex;
+            fmSynth->setModulationIndex(modIndex);
+
             // initialize envelope
             cout << "Enter attack and release" << endl;
             cout << "<attack> <release>" << endl;
@@ -104,9 +118,9 @@ int main() {
     JUCEModule juceModule (audioSource);
     juceModule.init(2,2);
 
-
-
     Synth& synth = audioSource.getSynth();
+
+    cout << "=== STARTING SYNTH ===" << endl;
 
     bool running = true;
 
@@ -118,13 +132,15 @@ int main() {
             running = false;
         }
     
-        else if(command == "a") {
-            synth.playNote(60, 0.8);
-        }
+        // FOR MANUAL TESTING
 
-        else if(command == "r") {
-            synth.noteOff();
-        }
+        // else if(command == "a") {
+        //     synth.playNote(60, 0.8);
+        // }
+
+        // else if(command == "r") {
+        //     synth.noteOff();
+        // }
         else {
             cout << "Command not found. Type 'help'." << endl;
         }

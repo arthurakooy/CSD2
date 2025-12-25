@@ -13,6 +13,8 @@ synth.cpp
 subSynth.cpp
 fmSynth.cpp
 envelope.cpp
+melody.cpp
+note.cpp
 )
 
 target_compile_definitions(synthesizer PRIVATE JUCE_WEB_BROWSER=0 JUCE_USE_CURL=0)
